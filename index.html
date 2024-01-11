@@ -99,11 +99,14 @@
           healthkitImg.src = "https://image.ibb.co/iTrjuU/hospital.png"; //"https://image.ibb.co/gFvSEU/first_aid_kit.png";
           var healthkit_width = 32;
           var healthkit_height = 32;
-          //sounds
-          var shot = new Audio();
-          shot.src =
-            "https://www.dropbox.com/s/w70c8hyryak6w40/Laser-SoundBible.com-602495617.mp3?dl=0";
+          // Sounds
+        var shot = new Audio();
+        shot.src = "https://www.soundbible.com/mp3/Laser-SoundBible.com-602495617.mp3";
+        shot.preload = "auto";
 
+        function playShot() {
+          shot.play();
+        }
           /*-----------GAME OBJECTS-----------*/
           //Player object
           function Player(x, y, width, height) {
@@ -228,24 +231,23 @@
           //draw bullet
           //var __bullet = new Bullet(mouse.x-bullet_width/2, mouse.y-player_height, bullet_width, bullet_height, bullet_speed);
 
-          //fire bullet function
-          function fire() {
-            //fire bullet from mouse.x on x axis, y axis, width, height, speed
-            for (var _ = 0; _ < 1; _++) {
-              var x = mouse.x - bullet_width / 2;
-              var y = mouse.y - player_height;
-              var __bullet = new Bullet(
-                x,
-                y,
-                bullet_width,
-                bullet_height,
-                bullet_speed
-              );
-              _bullets.push(__bullet); //push bullet to my array of bullets
-              //shot.play();
-            }
+          //draw bullet
+        function fire() {
+          for (var _ = 0; _ < 1; _++) {
+            var x = mouse.x - bullet_width / 2;
+            var y = mouse.y - player_height;
+            var __bullet = new Bullet(
+              x,
+              y,
+              bullet_width,
+              bullet_height,
+              bullet_speed
+            );
+            _bullets.push(__bullet);
+            playShot(); // Play the shot sound
           }
-          setInterval(fire, 200);
+        }
+        setInterval(fire, 200);
 
           //event listener for fire function
           canvas.addEventListener("click", function () {
